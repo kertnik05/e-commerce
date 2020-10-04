@@ -16,10 +16,12 @@ class RoleSeeder extends Seeder
     {
         Role::factory()->create();
         Role::factory()->create([
+            'id' => 2,
             'name' => 'customer',
             'description' => 'Customer'
         ]);
         Role::factory()->create([
+            'id' => 3,
             'name' => 'supplier',
             'description' => 'Supplier'
         ]);
