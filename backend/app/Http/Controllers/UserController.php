@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Models\User;
-use App\Models\UserDetail;
-use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('userDetail')->get();
-        return view('user.index', compact('users'));
+        $users = User::with(['userDetail', 'roles'])->latest()->paginate(10);
+        return UserResource::collection($users);
     }
 
-    public function create()
+    public function store(StoreUserRequest $request)
     {
-        return view('user.create');
-    }
-
-    public function store(UserRequest $request)
-    {
-        $role = Role::firstWhere('name', 'customer');
-        $userDetail = new UserDetail([
+        $user = User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        $user->userDetail()->create([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
@@ -32,52 +30,27 @@ class UserController extends Controller
             'gender' => $request->gender,
             'birthdate' => $request->birthdate,
             'address' => $request->address,
-            'shipping_address' => $request->shipping_address,
+            'shipping_address' => $request->shipping_address
         ]);
-
-        $user = new User([
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-
-        if ($user->save()) {
-            if ($role) $user->roles()->sync($role);
-            $user->userDetail()->save($userDetail);
-            return redirect()->route('users.index')->with('success', 'User saved!');
-        }
+        $user->roles()->sync(2);
+        return response()->json([
+            'data' => new UserResource($user->load(['userDetail', 'roles'])),
+            'success' => true
+        ], 201);
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id)->load(['userDetail', 'roles']);
-        return view('user.show', compact('user'));
+        return response()->json([
+            'data' => new UserResource($user->load(['userDetail', 'roles']))
+        ], 200);
     }
 
-    public function edit($id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = User::find($id)->load('userDetail');
-        return view('user.edit', compact('user'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'first_name' => 'required',
-            'middle_name' => 'required',
-            'last_name' => 'required',
-            'suffix' => 'required',
-            'gender' => 'required',
-            'birthdate' => 'required',
-            'address' => 'required',
-            'shipping_address' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $user = User::find($id)->load('userDetail');
         $user->update([
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password
         ]);
         $user->userDetail()->update([
             'first_name' => $request->first_name,
@@ -87,18 +60,22 @@ class UserController extends Controller
             'gender' => $request->gender,
             'birthdate' => $request->birthdate,
             'address' => $request->address,
-            'shipping_address' => $request->shipping_address,
+            'shipping_address' => $request->shipping_address
         ]);
-
-        return redirect()->route('users.index')->with('success', 'User updated!');
+        return response()->json([
+            'data' => new UserResource($user->load(['userDetail', 'roles'])),
+            'success' => true
+        ], 200);
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id)->load('userDetail');
-        $user->roles()->sync([]);
-        $user->userDetail->delete();
+        $user->userDetail()->delete();
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted');
+        $user->roles()->sync([]);
+        return response()->json([
+            'data' => new UserResource($user->load(['userDetail', 'roles'])),
+            'success' => true
+        ], 200);
     }
 }
