@@ -16,10 +16,9 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->hasUserDetail()
-            ->hasRoles(1, [
-                'name' => 'customer',
-                'description' => 'Customer'
-            ])
-            ->create();
+            ->create()
+            ->each(function ($user) {
+                $user->roles()->sync(2);
+            });
     }
 }
