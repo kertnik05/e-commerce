@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +25,14 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'birthdate' => 'required',
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20',
+            'gender' => 'required|min:1|max:1',
+            'birthdate' => 'required|date',
             'address' => 'required',
             'shipping_address' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'email' => ['required', Rule::unique('users')->ignore($this->user)->whereNull('deleted_at')],
+            'password' => 'required|min:8',
         ];
     }
 }
