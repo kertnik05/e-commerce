@@ -11,16 +11,7 @@ class UserDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'first_name',
-        'middle_name',
-        'last_name',
-        'suffix',
-        'gender',
-        'birthdate',
-        'address',
-        'shipping_address'
-    ];
+    protected $guarded = [];
 
     public function user()
     {
