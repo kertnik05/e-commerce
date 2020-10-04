@@ -2,53 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
+use App\Http\Resources\RoleResource;
 use App\Models\Role;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
-        return view('role.index', compact('roles'));
+        $roles = Role::latest()->paginate(10);
+        return RoleResource::collection($roles);
     }
 
-    public function create()
+    public function store(StoreRoleRequest $request)
     {
-        return view('role.create');
+        $role = Role::create($request->all());
+        return response()->json([
+            'data' => new RoleResource($role),
+            'success' => true
+        ], 201);
     }
 
-    public function store(Request $request)
+    public function show(Role $role)
     {
-        Role::create($request->validate([
-                'name'=>'required',
-                'description'=>'required'
-            ])
-        );
-
-        return redirect()->route('roles.index')->with('success', 'Role saved!');
+        return response()->json([
+            'data' => new RoleResource($role)
+        ], 200);
     }
 
-    public function edit($id)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
-        $role = Role::find($id);
-        return view('role.edit', compact('role'));
+        $role->update($request->all());
+        return response()->json([
+            'data' => new RoleResource($role),
+            'success' => true
+        ], 200);
     }
 
-    public function update(Request $request, $id)
+    public function destroy(Role $role)
     {
-        $role = Role::find($id)->update($request->validate([
-            'name'=>'required',
-            'description'=>'required'
-        ]));
-        return redirect()->route('roles.index')->with('success', 'Role updated!');
-    }
-
-    public function destroy($id)
-    {
-        $role = Role::find($id);
         if ($role->delete()) {
-            return redirect()->route('roles.index')->with('success', 'Role deleted!');
+            return response()->json([
+                'data' => new RoleResource($role),
+                'success' => true
+            ], 200);
         }
     }
 }
