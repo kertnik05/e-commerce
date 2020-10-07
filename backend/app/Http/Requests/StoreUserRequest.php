@@ -31,8 +31,8 @@ class StoreUserRequest extends FormRequest
             'birthdate' => 'required|date',
             'address' => 'required',
             'shipping_address' => 'required',
-            'email' => ['required', Rule::unique('users')->whereNull('deleted_at')],
-            'password' => 'required|min:8',
+            'email' => [Rule::unique('users')->whereNull('deleted_at')],
+            'password' => 'min:8',
         ];
     }
 }

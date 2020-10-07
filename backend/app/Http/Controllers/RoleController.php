@@ -19,7 +19,6 @@ class RoleController extends Controller
     {
         $role = Role::create($request->all());
         return response()->json([
-            'data' => new RoleResource($role),
             'success' => true
         ], 201);
     }
@@ -35,7 +34,6 @@ class RoleController extends Controller
     {
         $role->update($request->all());
         return response()->json([
-            'data' => new RoleResource($role),
             'success' => true
         ], 200);
     }
@@ -44,7 +42,6 @@ class RoleController extends Controller
     {
         if ($role->delete()) {
             return response()->json([
-                'data' => new RoleResource($role),
                 'success' => true
             ], 200);
         }
