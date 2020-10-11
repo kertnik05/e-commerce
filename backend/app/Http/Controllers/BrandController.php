@@ -27,19 +27,19 @@ class BrandController extends Controller
         return response()->json([
             'data' => new BrandResource($brand),
             'success' => true
-        ], 200);
+        ]);
     }
 
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
         $brand->update($request->all());
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => true]);
     }
 
     public function destroy(Brand $brand)
     {
         if ($brand->delete()) {
-            return response()->json(['success' => true], 201);
+            return response()->json(['success' => true]);
         }
     }
 }

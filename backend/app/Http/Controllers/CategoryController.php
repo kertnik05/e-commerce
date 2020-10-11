@@ -26,19 +26,19 @@ class CategoryController extends Controller
         return response()->json([
             'data' => new CategoryResource($category),
             'success' => true
-        ], 200);
+        ]);
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->all());
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => true]);
     }
 
     public function destroy(Category $category)
     {
         if ($category->delete()) {
-            return response()->json(['success' => true], 200);
+            return response()->json(['success' => true]);
         }
     }
 }

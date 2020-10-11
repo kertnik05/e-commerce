@@ -26,19 +26,19 @@ class ProductController extends Controller
         return response()->json([
             'data' => new ProductResource($product->load(['brand', 'category'])),
             'success' => true
-        ], 200);
+        ]);
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
         $product->update($request->all());
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => true]);
     }
 
     public function destroy(Product $product)
     {
         if ($product->delete()) {
-            return response()->json(['success' => true], 200);
+            return response()->json(['success' => true]);
         }
     }
 }
