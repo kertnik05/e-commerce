@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,8 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|min:2|max:20',
-            'last_name' => 'required|min:2|max:20',
-            'gender' => 'required|min:1|max:1',
-            'birthdate' => 'required|date',
-            'address' => 'required',
-            'shipping_address' => 'required',
-            'email' => [Rule::unique('users')->whereNull('deleted_at')],
-            'password' => 'min:8',
+            'name' => ['required', 'min:4', Rule::unique('categories')->whereNull('deleted_at')],
+            'description' => 'required|min:4'
         ];
     }
 }

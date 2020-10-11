@@ -8,6 +8,10 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionRoleController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,11 +33,13 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('roles/{role}/add_permission', [RoleController::class, 'addRolePermission'])->name('role.add_permission');
     Route::delete('roles/{role}/remove_permission', [RoleController::class, 'removeRolePermission'])->name('role.remove_permission');
+  
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('permissions', PermissionController::class);
     Route::apiResource('shippers', ShipperController::class);
     Route::apiResource('payment_types', PaymentTypeController::class);
-
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('brands', BrandController::class);
+    Route::apiResource('products', ProductController::class);
 });
-
