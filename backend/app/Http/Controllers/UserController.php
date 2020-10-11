@@ -58,9 +58,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return response()->json([
-            'data' => new UserResource($user->load(['userDetail', 'roles']))
-        ], 200);
+        return response()->json(['data' => new UserResource($user->load(['userDetail', 'roles']))]);
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -79,9 +77,7 @@ class UserController extends Controller
             'address' => $request->address,
             'shipping_address' => $request->shipping_address
         ]);
-        return response()->json([
-            'success' => true
-        ], 200);
+        return response()->json(['success' => true]);
     }
 
     public function destroy(User $user)
@@ -89,8 +85,6 @@ class UserController extends Controller
         $user->userDetail()->delete();
         $user->delete();
         $user->roles()->sync([]);
-        return response()->json([
-            'success' => true
-        ], 200);
+        return response()->json(['success' => true]);
     }
 }
