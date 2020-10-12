@@ -24,9 +24,7 @@ class UpdatePaymentTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'name' => ['required', 'unique:payment_types,name,' .$this->payment_type->id]
-
         ];
     }
 }

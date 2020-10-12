@@ -22,7 +22,6 @@ class PermissionFactory extends Factory
     public function definition()
     {
         return [
-            //
             'name' => $this->faker->text('20'),
             'description' => $this->faker->paragraph,
         ];

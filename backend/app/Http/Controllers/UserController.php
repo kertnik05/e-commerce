@@ -90,15 +90,17 @@ class UserController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $credentials = $request->only('email', 'password');
 
-        if(!Auth::attempt($credentials)){
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'The email and password does not match in our database!',
                 'success' => false
             ], 401);
         }
+
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken('user-token');
 
@@ -107,12 +109,11 @@ class UserController extends Controller
             'access_token' => $token->plainTextToken,
             'token_type' => 'Bearer'
         ]);
-
     }
 
-    public function logout(){
+    public function logout()
+    {
         $user = Auth::user();
-
         $user->tokens()->delete();
 
         return response()->json([

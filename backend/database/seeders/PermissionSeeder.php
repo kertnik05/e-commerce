@@ -14,7 +14,6 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        //
         $role_array = array();
         foreach(Role::all() as $key => $value){
             $role_array[] = $value->id;
@@ -24,7 +23,5 @@ class PermissionSeeder extends Seeder
         // ->each(function($permission) use ($role_array){
         //     $permission->roles()->sync($role_array);
         // });
-
-
     }
 }

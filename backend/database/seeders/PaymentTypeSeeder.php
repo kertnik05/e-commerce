@@ -13,7 +13,6 @@ class PaymentTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
         PaymentType::factory()->times(10)->create();
     }
 }

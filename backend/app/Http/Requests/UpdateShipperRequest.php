@@ -24,7 +24,6 @@ class UpdateShipperRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'name' => ['required','unique:shippers,name,'.$this->shipper->id],
             'contact_number' => ['required', 'numeric'],
             'address' => ['required']

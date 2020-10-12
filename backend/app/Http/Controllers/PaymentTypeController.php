@@ -10,24 +10,35 @@ use App\Models\PaymentType;
 
 class PaymentTypeController extends Controller
 {
-    //
-    public function index(){
+    public function index()
+    {
         return PaymentTypeResource::collection(PaymentType::all());
     }
 
-    public function store(StorePaymentTypeRequest $request, PaymentType $payment_type){
+    public function store(StorePaymentTypeRequest $request, PaymentType $payment_type)
+    {
         $payment_type->create($request->only('name'));
-        return response()->json(['success' => true, 'message' => 'Payment Type was succesfully created!']);
-
+        return response()->json([
+            'success' => true, 
+            'message' => 'Payment Type was succesfully created!'
+        ]);
     }
-    public function update(UpdatePaymentTypeRequest $request, PaymentType $payment_type){
+
+    public function update(UpdatePaymentTypeRequest $request, PaymentType $payment_type)
+    {
         $payment_type->update($request->only('name'));
-        return response()->json(['success' => true, 'message' => 'Payment Type was succesfully updated!']);
-
+        return response()->json([
+            'success' => true, 
+            'message' => 'Payment Type was succesfully updated!'
+        ]);
     }
-    public function destroy(PaymentType $payment_type){
-        $payment_type->delete();
-        return response()->json(['success' => true, 'message' => 'Payment Type was succesfully deleted!']);
 
+    public function destroy(PaymentType $payment_type)
+    {
+        $payment_type->delete();
+        return response()->json([
+            'success' => true, 
+            'message' => 'Payment Type was succesfully deleted!'
+        ]);
     }
 }

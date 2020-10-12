@@ -43,16 +43,22 @@ class RoleController extends Controller
             return response()->json(['success' => true]);
         }
     }
-    public function addRolePermission(StorePermissionRoleRequest $request, Role $role){
 
+    public function addRolePermission(StorePermissionRoleRequest $request, Role $role)
+    {
         $role = $role->permissions()->attach($request->permission_id);
-        return response()->json(['success' => true, 'message' => 'The permission in role was succesfully created!']);
-
+        return response()->json([
+            'success' => true, 
+            'message' => 'The permission in role was succesfully created!'
+        ]);
     }
 
-    public function removeRolePermission(Request $request, Role $role){
+    public function removeRolePermission(Request $request, Role $role)
+    {
         $role = $role->permissions()->detach($request->permission_id);
-
-        return response()->json(['success' => true, 'message' => 'The permission in role was succesfully deleted!']);
+        return response()->json([
+            'success' => true, 
+            'message' => 'The permission in role was succesfully deleted!'
+        ]);
     }
 }
