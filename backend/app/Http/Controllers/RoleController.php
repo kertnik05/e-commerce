@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Http\Requests\StorePermissionRoleRequest;
 use App\Http\Resources\RoleResource;
 use App\Models\Role;
+use Illuminate\Http\Request;
+
 
 class RoleController extends Controller
 {
@@ -39,5 +42,17 @@ class RoleController extends Controller
         if ($role->delete()) {
             return response()->json(['success' => true]);
         }
+    }
+    public function addRolePermission(StorePermissionRoleRequest $request, Role $role){
+
+        $role = $role->permissions()->attach($request->permission_id);
+        return response()->json(['success' => true, 'message' => 'The permission in role was succesfully created!']);
+
+    }
+
+    public function removeRolePermission(Request $request, Role $role){
+        $role = $role->permissions()->detach($request->permission_id);
+
+        return response()->json(['success' => true, 'message' => 'The permission in role was succesfully deleted!']);
     }
 }
