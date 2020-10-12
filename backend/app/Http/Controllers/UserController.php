@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddRoleUserRequest;
+use App\Http\Requests\RemoveRoleUserRequest;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Http\Resources\UserResource;
@@ -86,5 +88,23 @@ class UserController extends Controller
         $user->delete();
         $user->roles()->sync([]);
         return response()->json(['success' => true]);
+    }
+
+    public function addRoleUser(AddRoleUserRequest $request, User $user) 
+    {
+        $user = $user->roles()->attach($request->role_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Role was successfully added to the user!'
+        ]);
+    }
+
+    public function removeRoleUser(RemoveRoleUserRequest $request ,User $user)
+    {
+        $user = $user->roles()->detach($request->role_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Role was successfully removed to the user!'
+        ]);
     }
 }

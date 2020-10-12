@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('users/{user}/add-role', [UserController::class, 'addRoleUser'])->name('users.add-role');
+Route::delete('users/{user}/remove-role', [UserController::class, 'removeRoleUser'])->name('users.remove-role');
 Route::apiResource('roles', RoleController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('categories', CategoryController::class);
