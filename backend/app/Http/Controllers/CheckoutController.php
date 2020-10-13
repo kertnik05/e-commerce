@@ -12,7 +12,7 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $checkouts = Checkout::with('paymentType')->latest()->get();
+        $checkouts = Checkout::with('paymentType')->latest()->paginate(10);
         return CheckoutResource::collection($checkouts);
     }
 
