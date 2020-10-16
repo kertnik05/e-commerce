@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\Checkout;
+use App\Models\PaymentType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class PaymentType extends Model
+class Checkout extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function checkouts()
+    public function paymentType()
     {
-        return $this->hasMany(Checkout::class);
+        return $this->belongsTo(PaymentType::class);
     }
 }

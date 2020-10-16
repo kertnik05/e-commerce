@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CheckoutDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +47,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('brands', BrandController::class);
     Route::apiResource('products', ProductController::class);
+    Route::apiResource('checkouts', CheckoutController::class);
+    Route::apiResource('checkout-details', CheckoutDetailController::class);
 });
