@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StorePermissionRoleRequest extends FormRequest
+class RemoveRoleUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +24,7 @@ class StorePermissionRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'permission_id' => [
-                Rule::unique('permission_roles')->where(function ($query) {
-                    return $query->where('role_id', $this->role->id)
-                        ->where('permission_id', $this->permission_id);
-                })
-            ]
+            'role_id' => 'required|numeric|min:1'
         ];
     }
 }

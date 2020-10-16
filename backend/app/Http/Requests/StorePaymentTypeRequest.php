@@ -24,7 +24,6 @@ class StorePaymentTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'name' => ['required', 'unique:payment_types,name']
         ];
     }

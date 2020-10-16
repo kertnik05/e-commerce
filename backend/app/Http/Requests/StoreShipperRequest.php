@@ -24,7 +24,6 @@ class StoreShipperRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'name' => ['required','unique:shippers,name'],
             'contact_number' => ['required', 'numeric'],
             'address' => ['required']

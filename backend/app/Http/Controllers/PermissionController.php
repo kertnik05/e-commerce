@@ -2,36 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Http\Resources\PermissionResource;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 
 class PermissionController extends Controller
 {
-    //
-    public function index(){
-
+    public function index()
+    {
         return PermissionResource::collection(Permission::all());
     }
 
-    public function store(StorePermissionRequest $request, Permission $permission){
+    public function store(StorePermissionRequest $request, Permission $permission)
+    {
         $permission->create($request->only('name', 'description'));
-        return response()->json(['success' => true, 'message' => 'Permission was succesfully created!']);
+        return response()->json([
+            'success' => true, 
+            'message' => 'Permission was succesfully created!'
+        ]);
     }
 
-    public function update(UpdatePermissionRequest $request, Permission $permission){
+    public function update(UpdatePermissionRequest $request, Permission $permission)
+    {
         $permission = $permission->update($request->only('name', 'description'));
-        return response()->json(['success' => true, 'message' => 'Permission was succesfully updated!']);
-
-
+        return response()->json([
+            'success' => true, 
+            'message' => 'Permission was succesfully updated!'
+        ]);
     }
-    public function destroy(Permission $permission){
+
+    public function destroy(Permission $permission)
+    {
         $permission->delete();
-        return response()->json(['success' => true, 'message' => 'Permission was succesfully removed!']);
-
+        return response()->json([
+            'success' => true, 
+            'message' => 'Permission was succesfully removed!'
+        ]);
     }
-
 }

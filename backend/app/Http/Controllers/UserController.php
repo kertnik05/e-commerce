@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddRoleUserRequest;
+use App\Http\Requests\RemoveRoleUserRequest;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Http\Resources\UserResource;
@@ -90,15 +92,35 @@ class UserController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function login(LoginRequest $request){
+    public function addRoleUser(AddRoleUserRequest $request, User $user) 
+    {
+        $user = $user->roles()->attach($request->role_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Role was successfully added to the user!'
+        ]);
+    }
+
+    public function removeRoleUser(RemoveRoleUserRequest $request ,User $user)
+    {
+        $user = $user->roles()->detach($request->role_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Role was successfully removed to the user!'
+        ]);
+    }
+    
+    public function login(LoginRequest $request)
+    {
         $credentials = $request->only('email', 'password');
 
-        if(!Auth::attempt($credentials)){
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'The email and password does not match in our database!',
                 'success' => false
             ], 401);
         }
+
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken('user-token');
 
@@ -107,12 +129,11 @@ class UserController extends Controller
             'access_token' => $token->plainTextToken,
             'token_type' => 'Bearer'
         ]);
-
     }
 
-    public function logout(){
+    public function logout()
+    {
         $user = Auth::user();
-
         $user->tokens()->delete();
 
         return response()->json([

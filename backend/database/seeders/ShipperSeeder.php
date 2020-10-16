@@ -13,8 +13,6 @@ class ShipperSeeder extends Seeder
      */
     public function run()
     {
-        //
         Shipper::factory()->times(10)->create();
-
     }
 }

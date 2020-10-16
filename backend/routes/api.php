@@ -28,12 +28,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('users/login', [UserController::class, 'login'])->name('user.login');
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('users/logout', [UserController::class, 'logout'])->name('user.logout');
 
+    Route::post('users/{user}/add-role', [UserController::class, 'addRoleUser'])->name('users.add-role');
     Route::post('roles/{role}/add_permission', [RoleController::class, 'addRolePermission'])->name('role.add_permission');
+    Route::delete('users/{user}/remove-role', [UserController::class, 'removeRoleUser'])->name('users.remove-role');
     Route::delete('roles/{role}/remove_permission', [RoleController::class, 'removeRolePermission'])->name('role.remove_permission');
-  
+
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('permissions', PermissionController::class);
