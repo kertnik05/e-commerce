@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\PermissionRoleController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -27,10 +27,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('users/login', [UserController::class, 'login'])->name('user.login');
+Route::post('users/login', [LoginController::class, 'login'])->name('user.login');
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::post('users/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::post('users/logout', [LoginController::class, 'logout'])->name('user.logout');
 
     Route::post('users/{user}/add-role', [UserController::class, 'addRoleUser'])->name('users.add-role');
     Route::post('roles/{role}/add_permission', [RoleController::class, 'addRolePermission'])->name('role.add_permission');
