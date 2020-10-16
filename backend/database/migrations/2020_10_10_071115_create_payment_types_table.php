@@ -18,6 +18,7 @@ class CreatePaymentTypesTable extends Migration
             $table->string('name', 50);
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['name', 'deleted_at']);
         });
     }
 
