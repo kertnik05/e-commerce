@@ -19,27 +19,33 @@ class BrandController extends Controller
     public function store(StoreBrandRequest $request)
     {
         Brand::create($request->validated());
-        return response()->json(['success' => true], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Brand successfully created!'
+        ], 201);
     }
 
     public function show(Brand $brand)
     {
-        return response()->json([
-            'data' => new BrandResource($brand),
-            'success' => true
-        ]);
+        return new BrandResource($brand);
     }
 
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
         $brand->update($request->validated());
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Brand successfully updated!'
+        ]);
     }
 
     public function destroy(Brand $brand)
     {
         if ($brand->delete()) {
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Brand successfully deleted!'
+            ]);
         }
     }
 }

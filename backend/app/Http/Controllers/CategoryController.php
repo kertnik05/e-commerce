@@ -18,27 +18,33 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         Category::create($request->validated());
-        return response()->json(['success' => true], 201);
+        return response()->json([
+            'success' => true,
+            'message' => 'Category successfully created!'
+        ], 201);
     }
 
     public function show(Category $category)
     {
-        return response()->json([
-            'data' => new CategoryResource($category),
-            'success' => true
-        ]);
+        return new CategoryResource($category);
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Category successfully created!'
+        ]);
     }
 
     public function destroy(Category $category)
     {
         if ($category->delete()) {
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Category successfully deleted!'
+            ]);
         }
     }
 }
