@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        if ($request->has(['email', 'password'])) {
+        if ($request->has(['email', 'password']) && $request->filled(['email', 'password'])) {
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),

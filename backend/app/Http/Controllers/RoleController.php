@@ -20,7 +20,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        $role = Role::create($request->all());
+        $role = Role::create($request->validated());
         return response()->json([
             'success' => true
         ], 201);
@@ -33,7 +33,7 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        $role->update($request->all());
+        $role->update($request->validated());
         return response()->json(['success' => true]);
     }
 

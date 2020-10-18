@@ -18,7 +18,7 @@ class BrandController extends Controller
 
     public function store(StoreBrandRequest $request)
     {
-        Brand::create($request->all());
+        Brand::create($request->validated());
         return response()->json(['success' => true], 201);
     }
 
@@ -32,7 +32,7 @@ class BrandController extends Controller
 
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $brand->update($request->all());
+        $brand->update($request->validated());
         return response()->json(['success' => true]);
     }
 

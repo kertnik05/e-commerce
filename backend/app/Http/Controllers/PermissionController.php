@@ -16,7 +16,7 @@ class PermissionController extends Controller
 
     public function store(StorePermissionRequest $request, Permission $permission)
     {
-        $permission->create($request->only('name', 'description'));
+        $permission->create($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Permission was succesfully created!'
@@ -25,7 +25,7 @@ class PermissionController extends Controller
 
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
-        $permission = $permission->update($request->only('name', 'description'));
+        $permission = $permission->update($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Permission was succesfully updated!'

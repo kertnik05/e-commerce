@@ -16,7 +16,7 @@ class ShipperController extends Controller
 
     public function store(StoreShipperRequest $request, Shipper $shipper)
     {
-        $shipper->create($request->only('name', 'contact_number', 'address'));
+        $shipper->create($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Shipper was succesfully created!'
@@ -25,7 +25,7 @@ class ShipperController extends Controller
 
     public function update(UpdateShipperRequest $request, Shipper $shipper)
     {
-        $shipper->update($request->only('name', 'contact_number', 'address'));
+        $shipper->update($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Shipper was succesfully updated!'
