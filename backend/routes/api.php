@@ -13,6 +13,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CheckoutDetailController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('products', ProductController::class);
     Route::apiResource('checkouts', CheckoutController::class);
     Route::apiResource('checkout-details', CheckoutDetailController::class);
+    Route::apiResource('orders', OrderController::class);
 });
