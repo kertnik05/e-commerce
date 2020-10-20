@@ -22,7 +22,7 @@ class OrderController extends Controller
 
         $order = $order->create([
             'user_details_id' => Auth::user()->id,
-            'product_Id' => $request->product_id,
+            'product_id' => $request->product_id,
             'quantity' => $request->quantity
         ]);
 
