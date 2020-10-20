@@ -26,7 +26,7 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4', Rule::unique('brands')->whereNull('deleted_at')],
-            'description' => 'required|min:4'
+            'description' => ['required','min:4']
         ];
     }
 }

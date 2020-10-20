@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePermissionRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:permissions,name,'.$this->permission->id],
+            'name' => ['required', Rule::unique('permissions')->ignore($this->permission)->whereNull('deleted_at')],
             'description' => ['required']
         ];
     }

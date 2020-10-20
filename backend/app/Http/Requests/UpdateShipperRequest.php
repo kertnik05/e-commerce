@@ -24,7 +24,7 @@ class UpdateShipperRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:shippers,name,'.$this->shipper->id],
+            'name' => ['required', Rule::unique('shippers')->ignore($this->shipper)->whereNull('deleted_at')],
             'contact_number' => ['required', 'numeric'],
             'address' => ['required']
         ];

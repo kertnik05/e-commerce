@@ -31,7 +31,7 @@ class StoreRoleRequest extends FormRequest
                 'max:20',
                 Rule::unique('roles')->whereNull('deleted_at')
             ],
-            'description'=>'required|min:4|max:20'
+            'description'=> ['required','min:4','max:20']
         ];
     }
 }

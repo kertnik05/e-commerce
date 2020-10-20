@@ -24,9 +24,9 @@ class StoreCheckoutRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_id' => 'required|numeric|min:1',
-            'payment_type_id' => 'required|numeric|min:1',
-            'shipping_address' => 'required|min:10'
+            'order_id' => ['required','integer','min:1'],
+            'payment_type_id' => ['required','integer','min:1'],
+            'shipping_address' => 'required'
         ];
     }
 }

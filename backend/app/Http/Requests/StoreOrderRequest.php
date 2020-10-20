@@ -28,8 +28,8 @@ class StoreOrderRequest extends FormRequest
     {
 
             return [
-                'product_id' => 'required|numeric',
-                'quantity' => 'required|numeric|min:1'
+                'product_id' => ['required','integer'],
+                'quantity' => ['required','integer','min:1']
             ];
 
     }

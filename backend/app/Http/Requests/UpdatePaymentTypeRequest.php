@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePaymentTypeRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class UpdatePaymentTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:payment_types,name,' .$this->payment_type->id]
+            'name' => ['required', Rule::unique('payment_types')->ignore($this->payment_type)->whereNull('deleted_at')]
         ];
     }
 }

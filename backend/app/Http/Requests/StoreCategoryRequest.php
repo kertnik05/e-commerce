@@ -26,7 +26,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4', Rule::unique('categories')->whereNull('deleted_at')],
-            'description' => 'required|min:4'
+            'description' => ['required','min:4']
         ];
     }
 }

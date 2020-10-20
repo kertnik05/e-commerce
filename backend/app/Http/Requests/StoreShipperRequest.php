@@ -24,9 +24,9 @@ class StoreShipperRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:shippers,name'],
+            'name' => ['required',Rule::unique('shippers')->whereNull('deleted_at')],
             'contact_number' => ['required', 'numeric'],
-            'address' => ['required']
+            'address' => 'required'
         ];
     }
 }
