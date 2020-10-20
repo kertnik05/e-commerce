@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,11 +22,12 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'brand_id' => Brand::factory(),
-            'category_id' => Category::factory(),
+            'brand_id' => rand(1, 10),
+            'category_id' => rand(1, 10),
             'name' => $this->faker->word,
             'description' => $this->faker->sentence(),
             'image' => $this->faker->image(),
+            'quantity' => rand(1, 100),
             'price' => $this->faker->randomNumber(2) * 100
         ];
     }

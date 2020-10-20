@@ -3,6 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\BrandSeeder;
+use Database\Seeders\ProductSeeder;
+use Database\Seeders\ShipperSeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\CheckoutSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\PaymentTypeSeeder;
+use Database\Seeders\CheckoutDetailSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +30,11 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             PaymentTypeSeeder::class,
             ShipperSeeder::class,
+            BrandSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            CheckoutSeeder::class,
+            CheckoutDetailSeeder::class,
         ]);
     }
 }
