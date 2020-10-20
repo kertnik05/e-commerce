@@ -17,7 +17,6 @@ class CreatePermissionRolesTable extends Migration
             $table->unsignedBigInteger('permission_id')->constrained();
             $table->unsignedBigInteger('role_id')->constrained();
             $table->unique(['permission_id', 'role_id']);
-            $table->timestamps();
         });
     }
 
