@@ -9,9 +9,11 @@ use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CheckoutDetailController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +30,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('users/login', [UserController::class, 'login'])->name('user.login');
+Route::post('users/login', [LoginController::class, 'login'])->name('user.login');
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::post('users/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::post('users/logout', [LoginController::class, 'logout'])->name('user.logout');
 
     Route::post('users/{user}/add-role', [UserController::class, 'addRoleUser'])->name('users.add-role');
     Route::post('roles/{role}/add_permission', [RoleController::class, 'addRolePermission'])->name('role.add_permission');
@@ -48,4 +50,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('products', ProductController::class);
     Route::apiResource('checkouts', CheckoutController::class);
     Route::apiResource('checkout-details', CheckoutDetailController::class);
+    Route::apiResource('orders', OrderController::class);
 });

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             CheckoutSeeder::class,
             CheckoutDetailSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

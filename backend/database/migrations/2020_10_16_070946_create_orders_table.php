@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentTypesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePaymentTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_types', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
+            $table->foreignId('user_details_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->bigInteger('quantity');
+            $table->integer('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['name', 'deleted_at']);
         });
     }
 
@@ -29,6 +31,6 @@ class CreatePaymentTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_types');
+        Schema::dropIfExists('orders');
     }
 }
