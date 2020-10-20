@@ -24,9 +24,9 @@ class UpdateCheckoutDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'checkout_id' => 'required|numeric|min:1',
-            'product_id' => 'required|numeric|min:1',
-            'price' => 'required|numeric|min:1'
+            'checkout_id' => ['required','integer','min:1'],
+            'product_id' => ['required','integer','min:1'],
+            'price' => ['required','numeric','min:1']
         ];
     }
 }

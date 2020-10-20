@@ -26,7 +26,7 @@ class StorePermissionRoleRequest extends FormRequest
     {
         return [
             'permission_id' => [
-                Rule::unique('permission_roles')->where(function ($query) {
+                Rule::unique('permission_role')->where(function ($query) {
                     return $query->where('role_id', $this->role->id)
                         ->where('permission_id', $this->permission_id);
                 })

@@ -14,6 +14,6 @@ class Permission extends Model
     protected $guarded = [];
 
     public function roles(){
-        return $this->belongsToMany(Role::class, 'permission_roles')->withTimestamps();
+        return $this->belongsToMany(Role::class);
     }
 }

@@ -26,7 +26,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4', Rule::unique('categories')->ignore($this->category)->whereNull('deleted_at')],
-            'description' => 'required|min:4'
+            'description' => ['required','min:4']
         ];
     }
 }

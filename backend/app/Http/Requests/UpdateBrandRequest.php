@@ -26,7 +26,7 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:4', Rule::unique('brands')->ignore($this->brand)->whereNull('deleted_at')],
-            'description' => 'required|min:4'
+            'description' => ['required','min:4']
         ];
     }
 }

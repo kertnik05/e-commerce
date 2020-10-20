@@ -24,7 +24,7 @@ class RemoveRoleUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required|numeric|min:1'
+            'role_id' => ['required','integer','min:1']
         ];
     }
 }

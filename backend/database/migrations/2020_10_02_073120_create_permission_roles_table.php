@@ -13,11 +13,10 @@ class CreatePermissionRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_roles', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->unsignedBigInteger('permission_id')->constrained();
             $table->unsignedBigInteger('role_id')->constrained();
             $table->unique(['permission_id', 'role_id']);
-            $table->timestamps();
         });
     }
 

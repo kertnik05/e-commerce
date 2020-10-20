@@ -24,7 +24,7 @@ class StorePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','unique:permissions,name'],
+            'name' => ['required',Rule::unique('permissions')->whereNull('deleted_at')],
             'description' => ['required']
         ];
     }

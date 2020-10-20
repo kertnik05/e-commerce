@@ -24,7 +24,7 @@ class StorePaymentTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:payment_types,name']
+            'name' => ['required', Rule::unique('payment_types')->whereNull('deleted_at')]
         ];
     }
 }

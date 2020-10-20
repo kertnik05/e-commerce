@@ -27,7 +27,7 @@ class AddRoleUserRequest extends FormRequest
         return [
             'role_id' => [
                 'required',
-                'numeric',
+                'integer',
                 'min:1',
                 Rule::unique('role_user')->where(function ($query) {
                     $query->where('user_id', $this->user->id)
