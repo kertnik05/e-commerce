@@ -20,27 +20,34 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        $role = Role::create($request->all());
+        $role = Role::create($request->validated());
         return response()->json([
-            'success' => true
+            'success' => true,
+            'message' => 'Role successfully created!'
         ], 201);
     }
 
     public function show(Role $role)
     {
-        return response()->json(['data' => new RoleResource($role)]);
+        return new RoleResource($role);
     }
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        $role->update($request->all());
-        return response()->json(['success' => true]);
+        $role->update($request->validated());
+        return response()->json([
+            'success' => true,
+            'message' => 'Role successfully updated!'
+        ]);
     }
 
     public function destroy(Role $role)
     {
         if ($role->delete()) {
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Role successfully deleted!'
+            ]);
         }
     }
 

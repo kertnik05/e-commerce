@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\StorePaymentTypeRequest;
 use App\Http\Requests\UpdatePaymentTypeRequest;
 use App\Http\Resources\PaymentTypeResource;
@@ -17,7 +16,7 @@ class PaymentTypeController extends Controller
 
     public function store(StorePaymentTypeRequest $request, PaymentType $payment_type)
     {
-        $payment_type->create($request->only('name'));
+        $payment_type->create($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Payment Type was succesfully created!'
@@ -26,7 +25,7 @@ class PaymentTypeController extends Controller
 
     public function update(UpdatePaymentTypeRequest $request, PaymentType $payment_type)
     {
-        $payment_type->update($request->only('name'));
+        $payment_type->update($request->validated());
         return response()->json([
             'success' => true, 
             'message' => 'Payment Type was succesfully updated!'

@@ -17,28 +17,34 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
-        return response()->json(['success' => true], 201);
+        Product::create($request->validated());
+        return response()->json([
+            'success' => true,
+            'message' => 'Product successfully created!'
+        ], 201);
     }
 
     public function show(Product $product)
     {
-        return response()->json([
-            'data' => new ProductResource($product->load(['brand', 'category'])),
-            'success' => true
-        ]);
+        return $product->load(['brand', 'category']);
     }
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
-        return response()->json(['success' => true]);
+        $product->update($request->validated());
+        return response()->json([
+            'success' => true,
+            'message' => 'Product successfully updated!'
+        ]);
     }
 
     public function destroy(Product $product)
     {
         if ($product->delete()) {
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Product successfully deleted!'
+            ]);
         }
     }
 }
