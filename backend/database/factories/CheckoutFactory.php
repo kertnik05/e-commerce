@@ -22,8 +22,8 @@ class CheckoutFactory extends Factory
     public function definition()
     {
         return [
-            'order_id' => 1,
             'payment_type_id' => rand(1, 10),
+            'shipper_id' => rand(1, 10),
             'shipping_address' => $this->faker->address
         ];
     }

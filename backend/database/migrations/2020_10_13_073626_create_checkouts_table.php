@@ -15,8 +15,8 @@ class CreateCheckoutsTable extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('order_id');
             $table->foreignId('payment_type_id')->constrained();
+            $table->foreignId('shipper_id')->constrained();
             $table->string('shipping_address');
             $table->timestamps();
             $table->softDeletes();

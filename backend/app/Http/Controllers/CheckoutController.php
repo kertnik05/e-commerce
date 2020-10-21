@@ -6,13 +6,13 @@ use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Requests\UpdateCheckoutRequest;
 use App\Http\Resources\CheckoutResource;
 use App\Models\Checkout;
-use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
-        $checkouts = Checkout::with('paymentType')->latest()->paginate(10);
+        $checkouts = Checkout::with(['paymentType', 'shipper_id', 'checkoutDetails.order'])
+            ->latest()->paginate(10);
         return CheckoutResource::collection($checkouts);
     }
 
@@ -27,9 +27,7 @@ class CheckoutController extends Controller
 
     public function show(Checkout $checkout)
     {
-        return response()->json([
-            'data' => new CheckoutResource($checkout->load('paymentType'))
-        ]);
+        new CheckoutResource($checkout->load(['paymentType', 'shipper_id', 'checkoutDetails.order']));
     }
 
     public function update(UpdateCheckoutRequest $request, Checkout $checkout)
