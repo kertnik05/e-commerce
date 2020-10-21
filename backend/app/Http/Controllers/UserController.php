@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddRoleUserRequest;
 use App\Http\Requests\RemoveRoleUserRequest;
 use App\Models\User;
-use App\Models\UserDetail;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -19,45 +17,28 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request, User $user)
     {
+        $message = 'Guest User successfully created!';
         if ($request->has(['email', 'password']) && $request->filled(['email', 'password'])) {
-            $user = User::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-            $user->userDetail()->create([
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'last_name' => $request->last_name,
-                'suffix' => $request->suffix,
-                'gender' => $request->gender,
-                'birthdate' => $request->birthdate,
-                'address' => $request->address,
-                'shipping_address' => $request->shipping_address
-            ]);
+            $user = $user->create($request->only(['email', 'password']));
             $user->roles()->sync(2);
-            return response()->json([
-                'success' => true,
-                'message' => 'User successfully created!'
-            ], 201);
+            $message = 'User successfully created!';
         }
-        else {
-            $user = UserDetail::create([
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
-                'last_name' => $request->last_name,
-                'suffix' => $request->suffix,
-                'gender' => $request->gender,
-                'birthdate' => $request->birthdate,
-                'address' => $request->address,
-                'shipping_address' => $request->shipping_address
-            ]);
-            return response()->json([
-                'success' => true,
-                'message' => 'Guest User successfully created!'
-            ], 201);
-        }
+        $user->userDetail()->create([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'suffix' => $request->suffix,
+            'gender' => $request->gender,
+            'birthdate' => $request->birthdate,
+            'address' => $request->address,
+            'shipping_address' => $request->shipping_address
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => $message
+        ], 201);
     }
 
     public function show(User $user)
