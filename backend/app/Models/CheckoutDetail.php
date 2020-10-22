@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use App\Models\Checkout;
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,9 +19,9 @@ class CheckoutDetail extends Model
         return $this->belongsTo(Checkout::class);
     }
 
-    public function product()
+    public function order()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Order::class);
     }
     
     public function getPriceAttribute($value) 

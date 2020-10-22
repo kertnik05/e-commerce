@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCheckoutDetailRequest extends FormRequest
 {
@@ -24,9 +25,23 @@ class StoreCheckoutDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'checkout_id' => ['required','integer','min:1'],
-            'product_id' => ['required','integer','min:1'],
-            'price' => ['required','integer','min:1']
+            'checkout_id' => [
+                'required',
+                'integer',
+                'min:1', 
+                Rule::unique('checkout_details')
+                    ->where('order_id', $this->order_id)
+                    ->whereNull('deleted_at')
+            ],
+            'order_id' => [
+                'required',
+                'integer',
+                'min:1', 
+                Rule::unique('checkout_details')
+                    ->where('checkout_id', $this->checkout_id)
+                    ->whereNull('deleted_at')
+            ],
+            'price' => ['required','numeric','min:1']
         ];
     }
 }

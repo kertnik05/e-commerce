@@ -23,7 +23,7 @@ class CheckoutDetailFactory extends Factory
     {
         return [
             'checkout_id' => rand(1, 10),
-            'product_id' => 1,
+            'order_id' => rand(1, 5),
             'price' => $this->faker->randomNumber(2) * 100
         ];
     }

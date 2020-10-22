@@ -16,11 +16,10 @@ class CreateCheckoutDetailsTable extends Migration
         Schema::create('checkout_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('checkout_id')->constrained();
-            $table->foreignId('product_id')->constrained();
             $table->unsignedInteger('price');
             $table->timestamps();
             $table->softDeletes();
-            $table->unique(['checkout_id', 'product_id']);
+            $table->unique('checkout_id');
         });
     }
 

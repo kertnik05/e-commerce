@@ -11,7 +11,7 @@ class CheckoutDetailController extends Controller
 {
     public function index()
     {
-        $checkoutDetails = CheckoutDetail::with(['checkout', 'product'])->latest()->paginate(10);
+        $checkoutDetails = CheckoutDetail::with(['checkout', 'order'])->latest()->paginate(10);
         return CheckoutDetailResource::collection($checkoutDetails);
     }
 
@@ -26,9 +26,7 @@ class CheckoutDetailController extends Controller
 
     public function show(CheckoutDetail $checkoutDetail)
     {
-        return response()->json([
-            'data' => new CheckoutDetailResource($checkoutDetail->load(['checkout', 'product']))
-        ]);
+        return new CheckoutDetailResource($checkoutDetail->load(['checkout', 'order']));
     }
 
     public function update(UpdateCheckoutDetailRequest $request, CheckoutDetail $checkoutDetail)
