@@ -41,7 +41,7 @@ class StoreCheckoutDetailRequest extends FormRequest
                     ->where('checkout_id', $this->checkout_id)
                     ->whereNull('deleted_at')
             ],
-            'price' => ['required','integer','min:1']
+            'price' => ['required','numeric','min:1']
         ];
     }
 }
