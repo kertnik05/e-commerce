@@ -9,9 +9,11 @@ use App\Models\Checkout;
 
 class CheckoutController extends Controller
 {
+    private $relations = ['paymentType', 'shipper_id', 'checkoutDetails.order'];
+
     public function index()
     {
-        $checkouts = Checkout::with(['paymentType', 'shipper_id', 'checkoutDetails.order'])
+        $checkouts = Checkout::with($this->relations)
             ->latest()->paginate(10);
         return CheckoutResource::collection($checkouts);
     }
@@ -27,7 +29,7 @@ class CheckoutController extends Controller
 
     public function show(Checkout $checkout)
     {
-        new CheckoutResource($checkout->load(['paymentType', 'shipper_id', 'checkoutDetails.order']));
+        return new CheckoutResource($checkout->load($this->relations));
     }
 
     public function update(UpdateCheckoutRequest $request, Checkout $checkout)
