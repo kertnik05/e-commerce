@@ -1,3 +1,6 @@
+window.axios = require('axios');
+axios.defaults.baseURL = 'http://api.e-commerce.test/api';
+
 import Vue from 'vue';
 import vuetify from './plugins/vuetify';
 import store from './plugins/store';
