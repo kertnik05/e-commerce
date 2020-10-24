@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddRoleUserRequest;
+use App\Http\Requests\StoreRoleUserRequest;
 use App\Http\Requests\RemoveRoleUserRequest;
 use App\Models\User;
 use App\Http\Resources\UserResource;
@@ -79,7 +79,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function addRoleUser(AddRoleUserRequest $request, User $user) 
+    public function addRoleUser(StoreRoleUserRequest $request, User $user) 
     {
         $user = $user->roles()->attach($request->role_id);
         return response()->json([
