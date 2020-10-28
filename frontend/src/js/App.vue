@@ -1,0 +1,29 @@
+<template>
+  <v-app>
+<!-- 
+   <router-link :to="{ name : 'home'}">Home</router-link>
+  <router-link :to="{ name : 'home'}">About</router-link> -->
+<Navbar></Navbar>
+<Sidebar></Sidebar>
+  <router-view/>
+  </v-app>
+      
+
+</template>
+
+<script>
+import Navbar from './components/Navbar.vue'
+import Sidebar from './components/Sidebar.vue'
+
+export default {
+    name: 'App',
+    components: {
+      Navbar,
+      Sidebar
+    },
+}
+</script>
+
+<style>
+
+</style>
