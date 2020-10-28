@@ -1,13 +1,11 @@
 <template>
-    <v-app>
-        <v-main>
+        <div>
             <v-container>Hello world</v-container>
-        </v-main>
-    </v-app>
+        </div>
 </template>
 
 <script>
     export default {
-        name: 'App'
+        name: 'Home'
     }
 </script>
