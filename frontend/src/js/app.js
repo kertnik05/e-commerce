@@ -6,7 +6,6 @@ import vuetify from './plugins/vuetify';
 import router from './plugins/router';
 import App from '../js/App.vue';
 import store from './plugins/store';
-// import App from './components/App';
 
 new Vue({
     el : "#root",
