@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    //
 
     public function index(){
-        // return new OrderResource(Order::with(['user_details', 'shipper', 'order_details', 'order_details.product'])->find(6));
         return OrderResource::collection(Order::with(['user_details', 'product'])->get());
     }
 
