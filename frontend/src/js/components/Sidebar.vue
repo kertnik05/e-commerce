@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { bus } from '../app.js';
 export default {
     data() {
       return {
@@ -50,7 +49,7 @@ export default {
       }
     },
     created(){
-        bus.$on('drawerState', () => {
+        this.$root.$on('drawerState', () => {
             this.drawer = !this.drawer;
         })
     }

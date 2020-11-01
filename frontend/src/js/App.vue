@@ -1,14 +1,9 @@
 <template>
   <v-app>
-<!-- 
-   <router-link :to="{ name : 'home'}">Home</router-link>
-  <router-link :to="{ name : 'home'}">About</router-link> -->
-<Navbar></Navbar>
-<Sidebar></Sidebar>
-  <router-view/>
+    <Navbar></Navbar>
+    <Sidebar></Sidebar>
+    <router-view/>
   </v-app>
-      
-
 </template>
 
 <script>
@@ -23,7 +18,3 @@ export default {
     },
 }
 </script>
-
-<style>
-
-</style>
