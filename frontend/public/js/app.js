@@ -190,11 +190,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -237,7 +232,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app.js */ "./src/js/app.js");
 //
 //
 //
@@ -287,13 +281,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Nav',
   methods: {
     drawerStateChanged: function drawerStateChanged() {
-      // this.$emit('drawerState')
-      _app_js__WEBPACK_IMPORTED_MODULE_0__["bus"].$emit('drawerState');
+      this.$root.$emit('drawerState');
     }
   }
 });
@@ -309,7 +301,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app.js */ "./src/js/app.js");
 //
 //
 //
@@ -347,7 +338,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -363,7 +353,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    _app_js__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('drawerState', function () {
+    this.$root.$on('drawerState', function () {
       _this.drawer = !_this.drawer;
     });
   }
@@ -60979,12 +60969,11 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
-/*! exports provided: bus */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bus", function() { return bus; });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mdi_font_css_materialdesignicons_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mdi/font/css/materialdesignicons.css */ "./node_modules/@mdi/font/css/materialdesignicons.css");
@@ -60997,7 +60986,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var bus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#root",
   router: _plugins_router__WEBPACK_IMPORTED_MODULE_3__["default"],

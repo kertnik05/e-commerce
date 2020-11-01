@@ -48,13 +48,11 @@
 
 </template>
 <script>
-import { bus } from '../app.js';
 export default {
     name : 'Nav',
     methods : {
         drawerStateChanged(){
-            // this.$emit('drawerState')
-            bus.$emit('drawerState');
+            this.$root.$emit('drawerState');
         }
     }
 }
