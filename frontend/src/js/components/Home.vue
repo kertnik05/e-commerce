@@ -1,11 +1,21 @@
 <template>
-        <div>
-            <v-container>Hello world</v-container>
-        </div>
+    <v-app>
+        <v-main>
+            <v-container>
+                Hello world
+                <LoginForm />
+            </v-container>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
+    import LoginForm from './LoginForm';
+
     export default {
-        name: 'Home'
+        name: 'App',
+        components: {
+            LoginForm
+        }
     }
 </script>
