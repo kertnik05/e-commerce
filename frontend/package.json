@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@mdi/font": "^5.7.55",
     "axios": "^0.20.0",
     "browser-sync": "^2.26.13",
     "browser-sync-webpack-plugin": "^2.0.1",
