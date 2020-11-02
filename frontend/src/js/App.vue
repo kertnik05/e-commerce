@@ -1,9 +1,9 @@
 <template>
-  <v-app>
-    <Navbar></Navbar>
-    <Sidebar></Sidebar>
-    <router-view/>
-  </v-app>
+    <v-app>
+        <Navbar></Navbar>
+        <Sidebar></Sidebar>
+        <router-view/>
+    </v-app>
 </template>
 
 <script>
@@ -13,8 +13,8 @@ import Sidebar from './components/Sidebar.vue'
 export default {
     name: 'App',
     components: {
-      Navbar,
-      Sidebar
+        Navbar,
+        Sidebar
     },
 }
 </script>
