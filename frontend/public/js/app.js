@@ -64312,6 +64312,7 @@ axios.defaults.baseURL = 'http://api.e-commerce.test/api';
 
 
 
+ // import App from './components/App';
 
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#root",
