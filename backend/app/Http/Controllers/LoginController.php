@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,11 +22,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken('user-token');
 
-        return response()->json([
-            'data' => new UserResource($user->load(['userDetail', 'roles'])),
-            'access_token' => $token->plainTextToken,
-            'token_type' => 'Bearer'
-        ]);
+        return response()->json(['access_token' => $token->plainTextToken]);
     }
     
     public function logout()
