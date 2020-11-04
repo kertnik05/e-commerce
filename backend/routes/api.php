@@ -26,8 +26,8 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->get('users/current-user', function (Request $request) {
+    return $request->user()->load(['userDetail', 'roles']);
 });
 
 Route::post('users/login', [LoginController::class, 'login'])->name('user.login');
