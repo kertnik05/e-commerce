@@ -16,7 +16,8 @@
             >
             <v-list-item>
                 <v-list-item-title>
-                    <router-link to="/login">Login</router-link>
+                    <!-- <router-link to="/login">Login</router-link> -->
+                    Foo
                 </v-list-item-title>
             </v-list-item>
 

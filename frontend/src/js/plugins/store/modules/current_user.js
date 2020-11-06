@@ -5,25 +5,25 @@ const mutations = {
     setUser(state, user) {
         state.user = user;
         localStorage.setItem('user', JSON.stringify(user));
-        axios.defaults.headers.common.Authorization = `Bearer ${user.access_token}`;
+
     },
-    clearUser(state) {
-        axios.post('users/logout').then(response => {
-            localStorage.removeItem('user');
-            state.user = null;
-            alert('User logged out');
-        }).catch(error => console.log(error));
+     clearUser(state) {
+        localStorage.removeItem('user');
+        state.user = null;
     }
 };
 const actions = {
-    loginUser({commit}, user) {
-        axios.post('users/login', user).then(response => {
-            alert('User logged in');
+    async loginUser({commit}, user) {
+          await axios.post('users/login', user).then(response => {
+            // alert('User logged in');
             commit('setUser', response.data);
-        }).catch(error => console.log(error));
+        })
     },
-    logoutUser({commit}) {
-        commit('clearUser');
+     async logoutUser({commit}) {
+        return await axios.post('users/logout').then(response => {
+            commit('clearUser');
+            return response;
+        })
     }
 };
 const getters = {
