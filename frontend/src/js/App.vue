@@ -2,6 +2,7 @@
     <v-app>
         <Navbar></Navbar>
         <Sidebar></Sidebar>
+
         <router-view/>
     </v-app>
 </template>
