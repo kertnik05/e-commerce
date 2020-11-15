@@ -1,5 +1,6 @@
 <template>
-    <v-container>Hello world</v-container>
+    <!-- <v-container>Hello world</v-container> -->
+    <div>Home</div>
 </template>
 
 <script>

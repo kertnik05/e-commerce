@@ -4,6 +4,23 @@ Vue.use(VueRouter);
 
 import Home from '../../views/Home';
 import LoginForm from '../../views/LoginForm';
+import Dashboard from '../../views/Dashboard';
+
+const guest = (to, from, next) => {
+    if (!localStorage.getItem('access_token')) {
+        return next();
+    } else {
+        return next('/');
+    }
+};
+
+const auth = (to, from, next) => {
+    if (localStorage.getItem('access_token')) {
+        return next();
+    } else {
+        return next('/login');
+    }
+};
 
 const routes = [
     {
@@ -14,8 +31,15 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: LoginForm
-    }
+        component: LoginForm,
+        beforeEnter: guest
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
+        beforeEnter: auth
+    },
 ];
 
 export default new VueRouter({

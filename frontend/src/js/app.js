@@ -7,20 +7,14 @@ import router from './plugins/router';
 import store from './plugins/store';
 import App from './App.vue';
 
-axios.interceptors.request.use(req => {
-    const userInfo = localStorage.getItem('user');
-    const userData = JSON.parse(userInfo);
-    if(userData){
-        const token = userData.access_token;
-        req.headers.Authorization = `Bearer ${token}`
-    }
-    return req;
-});
+require('./plugins/store/subscriber');
 
-new Vue({
-    el : "#root",
-    router,
-    vuetify,
-    store,
-    render : h => h(App)
-})
+store.dispatch('auth/attempt', localStorage.getItem('access_token')).then(() => {
+    new Vue({
+        el : "#root",
+        router,
+        vuetify,
+        store,
+        render : h => h(App)
+    });
+});
